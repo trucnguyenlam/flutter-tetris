@@ -11,8 +11,7 @@ import 'package:flutter/material.dart';
 class S implements WidgetsLocalizations {
   const S();
 
-  static const GeneratedLocalizationsDelegate delegate =
-    GeneratedLocalizationsDelegate();
+  static const GeneratedLocalizationsDelegate delegate = GeneratedLocalizationsDelegate();
 
   static S of(BuildContext context) => Localizations.of<S>(context, S);
 
@@ -20,12 +19,19 @@ class S implements WidgetsLocalizations {
   TextDirection get textDirection => TextDirection.ltr;
 
   String get cleans => "Cleans";
+
   String get level => "Level";
+
   String get next => "Next";
+
   String get pause_resume => "PAUSE/RESUME";
+
   String get points => "Points";
+
   String get reset => "RESET";
+
   String get reward => "Reward";
+
   String get sounds => "SOUNDS";
 }
 
@@ -41,18 +47,25 @@ class $zh_CN extends S {
 
   @override
   String get next => "下一个";
+
   @override
   String get reward => "赞赏";
+
   @override
   String get sounds => "声音";
+
   @override
   String get pause_resume => "暂停/恢复";
+
   @override
   String get level => "级别";
+
   @override
   String get reset => "重置";
+
   @override
   String get cleans => "消除";
+
   @override
   String get points => "分数";
 }
@@ -109,22 +122,21 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<S> {
         case "zh_CN":
           return SynchronousFuture<S>(const $zh_CN());
         default:
-          // NO-OP.
+        // NO-OP.
       }
     }
     return SynchronousFuture<S>(const S());
   }
 
   @override
-  bool isSupported(Locale locale) =>
-    locale != null && supportedLocales.contains(locale);
+  bool isSupported(Locale locale) => locale != null && supportedLocales.contains(locale);
 
   @override
   bool shouldReload(GeneratedLocalizationsDelegate old) => false;
 }
 
 String getLang(Locale l) => l == null
-  ? null
-  : l.countryCode != null && l.countryCode.isEmpty
-    ? l.languageCode
-    : l.toString();
+    ? null
+    : l.countryCode != null && l.countryCode.isEmpty
+        ? l.languageCode
+        : l.toString();

@@ -45,8 +45,7 @@ class RewardButton extends StatefulWidget {
 }
 
 class _RewardButtonState extends State<RewardButton> {
-  final FocusNode _rewardFocusNode =
-      FocusNode(canRequestFocus: false, skipTraversal: true);
+  final FocusNode _rewardFocusNode = FocusNode(canRequestFocus: false, skipTraversal: true);
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +69,10 @@ class _ScreenDecoration extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(
-              color: const Color(0xFF987f0f), width: SCREEN_BORDER_WIDTH),
-          left: BorderSide(
-              color: const Color(0xFF987f0f), width: SCREEN_BORDER_WIDTH),
-          right: BorderSide(
-              color: const Color(0xFFfae36c), width: SCREEN_BORDER_WIDTH),
-          bottom: BorderSide(
-              color: const Color(0xFFfae36c), width: SCREEN_BORDER_WIDTH),
+          top: BorderSide(color: const Color(0xFF987f0f), width: SCREEN_BORDER_WIDTH),
+          left: BorderSide(color: const Color(0xFF987f0f), width: SCREEN_BORDER_WIDTH),
+          right: BorderSide(color: const Color(0xFFfae36c), width: SCREEN_BORDER_WIDTH),
+          bottom: BorderSide(color: const Color(0xFFfae36c), width: SCREEN_BORDER_WIDTH),
         ),
       ),
       child: Container(

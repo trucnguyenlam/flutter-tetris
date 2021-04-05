@@ -48,8 +48,7 @@ class Brik extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(0.05 * width),
         padding: EdgeInsets.all(0.1 * width),
-        decoration:
-            BoxDecoration(border: Border.all(width: 0.10 * width, color: color)),
+        decoration: BoxDecoration(border: Border.all(width: 0.10 * width, color: color)),
         child: Container(
           color: color,
         ),

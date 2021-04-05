@@ -1,5 +1,6 @@
-import 'gamer.dart';
 import 'dart:math' as math;
+
+import 'gamer.dart';
 
 const BLOCK_SHAPES = {
   BlockType.I: [
@@ -94,8 +95,7 @@ class Block {
   }
 
   Block rotate() {
-    List<List<int>> result =
-        List.filled(shape[0].length, null, growable: false);
+    List<List<int>> result = List.filled(shape[0].length, null, growable: false);
     for (int row = 0; row < shape.length; row++) {
       for (int col = 0; col < shape[row].length; col++) {
         if (result[col] == null) {
@@ -104,20 +104,14 @@ class Block {
         result[col][row] = shape[shape.length - 1 - row][col];
       }
     }
-    final nextXy = [
-      this.xy[0] + ORIGIN[type][rotateIndex][0],
-      this.xy[1] + ORIGIN[type][rotateIndex][1]
-    ];
-    final nextRotateIndex =
-        rotateIndex + 1 >= ORIGIN[this.type].length ? 0 : rotateIndex + 1;
+    final nextXy = [this.xy[0] + ORIGIN[type][rotateIndex][0], this.xy[1] + ORIGIN[type][rotateIndex][1]];
+    final nextRotateIndex = rotateIndex + 1 >= ORIGIN[this.type].length ? 0 : rotateIndex + 1;
 
     return Block(type, result, nextXy, nextRotateIndex);
   }
 
   bool isValidInMatrix(List<List<int>> matrix) {
-    if (xy[1] + shape.length > GAME_PAD_MATRIX_H ||
-        xy[0] < 0 ||
-        xy[0] + shape[0].length > GAME_PAD_MATRIX_W) {
+    if (xy[1] + shape.length > GAME_PAD_MATRIX_H || xy[0] < 0 || xy[0] + shape[0].length > GAME_PAD_MATRIX_W) {
       return false;
     }
     for (var i = 0; i < matrix.length; i++) {

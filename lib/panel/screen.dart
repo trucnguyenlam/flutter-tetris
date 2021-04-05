@@ -57,8 +57,7 @@ class Shake extends StatefulWidget {
   ///true to shake screen vertically
   final bool shake;
 
-  const Shake({Key key, @required this.child, @required this.shake})
-      : super(key: key);
+  const Shake({Key key, @required this.child, @required this.shake}) : super(key: key);
 
   @override
   _ShakeState createState() => _ShakeState();
@@ -70,11 +69,10 @@ class _ShakeState extends State<Shake> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 150))
-          ..addListener(() {
-            setState(() {});
-          });
+    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 150))
+      ..addListener(() {
+        setState(() {});
+      });
     super.initState();
   }
 

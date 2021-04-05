@@ -19,14 +19,7 @@ class Sound extends StatefulWidget {
   }
 }
 
-const _SOUNDS = [
-  'clean.mp3',
-  'drop.mp3',
-  'explosion.mp3',
-  'move.mp3',
-  'rotate.mp3',
-  'start.mp3'
-];
+const _SOUNDS = ['clean.mp3', 'drop.mp3', 'explosion.mp3', 'move.mp3', 'rotate.mp3', 'start.mp3'];
 
 class SoundState extends State<Sound> {
   Soundpool _pool;

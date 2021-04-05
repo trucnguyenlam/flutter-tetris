@@ -226,12 +226,7 @@ class _Button extends StatefulWidget {
   final bool enableLongPress;
 
   const _Button(
-      {Key key,
-      @required this.size,
-      @required this.onTap,
-      this.icon,
-      this.color = Colors.blue,
-      this.enableLongPress = true})
+      {Key key, @required this.size, @required this.onTap, this.icon, this.color = Colors.blue, this.enableLongPress = true})
       : super(key: key);
 
   @override
@@ -261,9 +256,7 @@ class _Description extends StatelessWidget {
     Widget widget;
     switch (direction) {
       case AxisDirection.right:
-        widget = Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[child, SizedBox(width: 8), Text(text)]);
+        widget = Row(mainAxisSize: MainAxisSize.min, children: <Widget>[child, SizedBox(width: 8), Text(text)]);
         break;
       case AxisDirection.left:
         widget = Row(

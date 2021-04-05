@@ -16,12 +16,7 @@ class Number extends StatelessWidget {
 
   final bool padWithZero;
 
-  Number(
-      {Key key,
-      this.length = 5,
-      @required this.number,
-      this.padWithZero = false})
-      : super(key: key);
+  Number({Key key, this.length = 5, @required this.number, this.padWithZero = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +113,7 @@ class IconPause extends StatelessWidget {
   final bool enable;
   final Size size;
 
-  const IconPause({Key key, this.enable = true, this.size = const Size(18, 16)})
-      : super(key: key);
+  const IconPause({Key key, this.enable = true, this.size = const Size(18, 16)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +129,7 @@ class IconSound extends StatelessWidget {
   final bool enable;
   final Size size;
 
-  const IconSound({Key key, this.enable = true, this.size = const Size(18, 16)})
-      : super(key: key);
+  const IconSound({Key key, this.enable = true, this.size = const Size(18, 16)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -153,8 +146,7 @@ class IconColon extends StatelessWidget {
 
   final Size size;
 
-  const IconColon({Key key, this.enable = true, this.size = const Size(10, 17)})
-      : super(key: key);
+  const IconColon({Key key, this.enable = true, this.size = const Size(10, 17)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -202,18 +194,12 @@ class _Material extends StatelessWidget {
 
   final Offset srcOffset;
 
-  const _Material(
-      {Key key,
-      @required this.size,
-      @required this.srcSize,
-      @required this.srcOffset})
-      : super(key: key);
+  const _Material({Key key, @required this.size, @required this.srcSize, @required this.srcOffset}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      foregroundPainter: _MaterialPainter(
-          srcOffset, srcSize, GameMaterial.getMaterial(context)),
+      foregroundPainter: _MaterialPainter(srcOffset, srcSize, GameMaterial.getMaterial(context)),
       child: SizedBox.fromSize(
         size: size,
       ),
@@ -236,11 +222,9 @@ class _MaterialPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final src =
-        Rect.fromLTWH(offset.dx, offset.dy, this.size.width, this.size.height);
+    final src = Rect.fromLTWH(offset.dx, offset.dy, this.size.width, this.size.height);
     canvas.scale(size.width / this.size.width, size.height / this.size.height);
-    canvas.drawImageRect(material, src,
-        Rect.fromLTWH(0, 0, this.size.width, this.size.height), _paint);
+    canvas.drawImageRect(material, src, Rect.fromLTWH(0, 0, this.size.width, this.size.height), _paint);
   }
 
   @override

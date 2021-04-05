@@ -8,27 +8,21 @@ class DonationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      contentPadding:
-          const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 4),
+      contentPadding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 4),
       children: <Widget>[
         SizedBox(width: MediaQuery.of(context).size.width),
-        Container(
-            padding: const EdgeInsets.all(16), child: Text("开发不易，赞助一下开发者。")),
+        Container(padding: const EdgeInsets.all(16), child: Text("开发不易，赞助一下开发者。")),
         _ActionTile(
           text: "微信捐赠",
           onTap: () async {
-            await showDialog(
-                context: context,
-                builder: (context) => _ReceiptDialog.weChat());
+            await showDialog(context: context, builder: (context) => _ReceiptDialog.weChat());
             Navigator.pop(context);
           },
         ),
         _ActionTile(
           text: "支付宝捐赠",
           onTap: () async {
-            await showDialog(
-                context: context,
-                builder: (context) => _ReceiptDialog.aliPay());
+            await showDialog(context: context, builder: (context) => _ReceiptDialog.aliPay());
             Navigator.pop(context);
           },
         ),
@@ -38,11 +32,9 @@ class DonationDialog extends StatelessWidget {
             await Clipboard.setData(ClipboardData(text: HONG_BAO));
             final data = await Clipboard.getData(Clipboard.kTextPlain);
             if (data.text == HONG_BAO) {
-              showSimpleNotification(context, Text("已复制到粘贴板 （≧ｙ≦＊）"));
+              showSimpleNotification(Text("已复制到粘贴板 （≧ｙ≦＊）"));
             } else {
-              await showDialog(
-                  context: context,
-                  builder: (context) => _SingleFieldDialog(text: HONG_BAO));
+              await showDialog(context: context, builder: (context) => _SingleFieldDialog(text: HONG_BAO));
             }
             Navigator.of(context).pop();
           },
@@ -97,8 +89,7 @@ class _ActionTile extends StatelessWidget {
 
   final String text;
 
-  const _ActionTile({Key key, @required this.onTap, @required this.text})
-      : super(key: key);
+  const _ActionTile({Key key, @required this.onTap, @required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

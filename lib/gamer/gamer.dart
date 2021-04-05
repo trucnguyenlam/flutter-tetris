@@ -237,8 +237,7 @@ class GameControl extends State<Game> with RouteAware {
         setState(() {});
         await Future.delayed(Duration(milliseconds: 100));
       }
-      clearLines
-          .forEach((line) => _mask[line].fillRange(0, GAME_PAD_MATRIX_W, 0));
+      clearLines.forEach((line) => _mask[line].fillRange(0, GAME_PAD_MATRIX_W, 0));
 
       //移除所有被消除的行
       clearLines.forEach((line) {
@@ -384,9 +383,7 @@ class GameControl extends State<Game> with RouteAware {
       }
     }
     debugPrint("game states : $_states");
-    return GameState(
-        mixed, _states, _level, _sound.mute, _points, _cleared, _next,
-        child: widget.child);
+    return GameState(mixed, _states, _level, _sound.mute, _points, _cleared, _next, child: widget.child);
   }
 
   void soundSwitch() {
@@ -397,9 +394,7 @@ class GameControl extends State<Game> with RouteAware {
 }
 
 class GameState extends InheritedWidget {
-  GameState(this.data, this.states, this.level, this.muted, this.points,
-      this.cleared, this.next,
-      {Key key, this.child})
+  GameState(this.data, this.states, this.level, this.muted, this.points, this.cleared, this.next, {Key key, this.child})
       : super(key: key, child: child);
 
   final Widget child;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tetris/gamer/gamer.dart';
 import 'package:tetris/material/briks.dart';
 import 'package:tetris/material/images.dart';
-import 'package:tetris/gamer/gamer.dart';
 
 const _PLAYER_PANEL_PADDING = 6;
 
@@ -49,7 +49,9 @@ class _PlayerPad extends StatelessWidget {
           children: list.map((b) {
             return b == 1
                 ? const Brik.normal()
-                : b == 2 ? const Brik.highlight() : const Brik.empty();
+                : b == 2
+                    ? const Brik.highlight()
+                    : const Brik.empty();
           }).toList(),
         );
       }).toList(),
