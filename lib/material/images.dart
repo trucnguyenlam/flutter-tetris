@@ -75,9 +75,10 @@ class _IconDragonState extends State<IconDragon> {
       if (_frame > 30) {
         _frame = 0;
       }
-      setState(() {
-        _frame++;
-      });
+      if (mounted)
+        setState(() {
+          _frame++;
+        });
     });
   }
 

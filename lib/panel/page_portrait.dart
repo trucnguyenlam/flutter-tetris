@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tetris/generated/i18n.dart';
-import 'package:tetris/income/donation_dialog.dart';
-import 'package:tetris/main.dart';
+import 'package:tetris/const.dart';
 import 'package:tetris/panel/controller.dart';
 import 'package:tetris/panel/screen.dart';
 
@@ -20,9 +18,6 @@ class PagePortrait extends StatelessWidget {
           padding: MediaQuery.of(context).padding,
           child: Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[Spacer(), RewardButton()],
-              ),
               Spacer(),
               _ScreenDecoration(child: Screen(width: screenW)),
               Spacer(flex: 2),
@@ -32,30 +27,6 @@ class PagePortrait extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class RewardButton extends StatefulWidget {
-  const RewardButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _RewardButtonState createState() => _RewardButtonState();
-}
-
-class _RewardButtonState extends State<RewardButton> {
-  final FocusNode _rewardFocusNode = FocusNode(canRequestFocus: false, skipTraversal: true);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-        focusNode: _rewardFocusNode,
-        autofocus: false,
-        onPressed: () {
-          showDialog(context: context, builder: (context) => DonationDialog());
-        },
-        child: Text(S.of(context).reward));
   }
 }
 

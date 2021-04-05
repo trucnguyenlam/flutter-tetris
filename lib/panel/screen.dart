@@ -71,7 +71,7 @@ class _ShakeState extends State<Shake> with TickerProviderStateMixin {
   void initState() {
     _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 150))
       ..addListener(() {
-        setState(() {});
+        if (mounted) setState(() {});
       });
     super.initState();
   }

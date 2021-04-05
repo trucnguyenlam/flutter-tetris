@@ -3,7 +3,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:tetris/gamer/gamer.dart';
-import 'package:tetris/generated/i18n.dart';
 
 class GameController extends StatelessWidget {
   @override
@@ -148,7 +147,7 @@ class SystemButtonGroup extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         _Description(
-          text: S.of(context).sounds,
+          text: 'SOUNDS',
           child: _Button(
               size: _SYSTEM_BUTTON_SIZE,
               color: _systemButtonColor,
@@ -158,7 +157,7 @@ class SystemButtonGroup extends StatelessWidget {
               }),
         ),
         _Description(
-          text: S.of(context).pause_resume,
+          text: "PAUSE/RESUME",
           child: _Button(
               size: _SYSTEM_BUTTON_SIZE,
               color: _systemButtonColor,
@@ -168,7 +167,7 @@ class SystemButtonGroup extends StatelessWidget {
               }),
         ),
         _Description(
-          text: S.of(context).reset,
+          text: 'RESET',
           child: _Button(
               size: _SYSTEM_BUTTON_SIZE,
               enableLongPress: false,
@@ -312,9 +311,10 @@ class _ButtonState extends State<_Button> {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTapDown: (_) async {
-          setState(() {
-            _color = widget.color.withOpacity(0.5);
-          });
+          if (mounted)
+            setState(() {
+              _color = widget.color.withOpacity(0.5);
+            });
           if (_timer != null) {
             return;
           }
@@ -340,17 +340,19 @@ class _ButtonState extends State<_Button> {
           _tapEnded = true;
           _timer?.cancel();
           _timer = null;
-          setState(() {
-            _color = widget.color;
-          });
+          if (mounted)
+            setState(() {
+              _color = widget.color;
+            });
         },
         onTapUp: (_) {
           _tapEnded = true;
           _timer?.cancel();
           _timer = null;
-          setState(() {
-            _color = widget.color;
-          });
+          if (mounted)
+            setState(() {
+              _color = widget.color;
+            });
         },
         child: SizedBox.fromSize(
           size: widget.size,

@@ -141,7 +141,7 @@ class GameControl extends State<Game> with RouteAware {
         _sound.rotate();
       }
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void right() {
@@ -154,7 +154,7 @@ class GameControl extends State<Game> with RouteAware {
         _sound.move();
       }
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void left() {
@@ -167,7 +167,7 @@ class GameControl extends State<Game> with RouteAware {
         _sound.move();
       }
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void drop() async {
@@ -177,13 +177,13 @@ class GameControl extends State<Game> with RouteAware {
         if (!fall.isValidInMatrix(_data)) {
           _current = _current.fall(step: i);
           _states = GameStates.drop;
-          setState(() {});
+          if (mounted) setState(() {});
           await Future.delayed(const Duration(milliseconds: 100));
           _mixCurrentIntoData(mixSound: _sound.fall);
           break;
         }
       }
-      setState(() {});
+      if (mounted) setState(() {});
     } else if (_states == GameStates.paused || _states == GameStates.none) {
       _startGame();
     }
@@ -201,7 +201,7 @@ class GameControl extends State<Game> with RouteAware {
         _mixCurrentIntoData();
       }
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   Timer _autoFallTimer;
@@ -225,7 +225,7 @@ class GameControl extends State<Game> with RouteAware {
     }
 
     if (clearLines.isNotEmpty) {
-      setState(() => _states = GameStates.clear);
+      if (mounted) setState(() => _states = GameStates.clear);
 
       _sound.clear();
 
@@ -234,7 +234,7 @@ class GameControl extends State<Game> with RouteAware {
         clearLines.forEach((line) {
           _mask[line].fillRange(0, GAME_PAD_MATRIX_W, count % 2 == 0 ? -1 : 1);
         });
-        setState(() {});
+        if (mounted) setState(() {});
         await Future.delayed(Duration(milliseconds: 100));
       }
       clearLines.forEach((line) => _mask[line].fillRange(0, GAME_PAD_MATRIX_W, 0));
@@ -256,10 +256,10 @@ class GameControl extends State<Game> with RouteAware {
       _states = GameStates.mixing;
       if (mixSound != null) mixSound();
       _forTable((i, j) => _mask[i][j] = _current.get(j, i) ?? _mask[i][j]);
-      setState(() {});
+      if (mounted) setState(() {});
       await Future.delayed(const Duration(milliseconds: 200));
       _forTable((i, j) => _mask[i][j] = 0);
-      setState(() {});
+      if (mounted) setState(() {});
     }
 
     //_current已经融入_data了，所以不再需要
@@ -306,7 +306,7 @@ class GameControl extends State<Game> with RouteAware {
     if (_states == GameStates.running) {
       _states = GameStates.paused;
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void pauseOrResume() {
@@ -335,7 +335,7 @@ class GameControl extends State<Game> with RouteAware {
         for (int i = 0; i < GAME_PAD_MATRIX_W; i++) {
           _data[line][i] = 1;
         }
-        setState(() {});
+        if (mounted) setState(() {});
         await Future.delayed(_REST_LINE_DURATION);
         return line != 0;
       });
@@ -347,14 +347,15 @@ class GameControl extends State<Game> with RouteAware {
         for (int i = 0; i < GAME_PAD_MATRIX_W; i++) {
           _data[line][i] = 0;
         }
-        setState(() {});
+        if (mounted) setState(() {});
         line++;
         await Future.delayed(_REST_LINE_DURATION);
         return line != GAME_PAD_MATRIX_H;
       });
-      setState(() {
-        _states = GameStates.none;
-      });
+      if (mounted)
+        setState(() {
+          _states = GameStates.none;
+        });
     }();
   }
 
@@ -364,7 +365,7 @@ class GameControl extends State<Game> with RouteAware {
     }
     _states = GameStates.running;
     _autoFall(true);
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
@@ -387,9 +388,10 @@ class GameControl extends State<Game> with RouteAware {
   }
 
   void soundSwitch() {
-    setState(() {
-      _sound.mute = !_sound.mute;
-    });
+    if (mounted)
+      setState(() {
+        _sound.mute = !_sound.mute;
+      });
   }
 }
 

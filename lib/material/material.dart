@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class GameMaterial extends StatefulWidget {
   final Widget child;
@@ -32,12 +31,13 @@ class _GameMaterialState extends State<GameMaterial> {
     if (material != null) {
       return;
     }
-    final bytes = await rootBundle.load("assets/material.png");
+    final bytes = await DefaultAssetBundle.of(context).load("assets/material.png");
     final codec = await ui.instantiateImageCodec(bytes.buffer.asUint8List());
     final frame = await codec.getNextFrame();
-    setState(() {
-      material = frame.image;
-    });
+    if (mounted)
+      setState(() {
+        material = frame.image;
+      });
   }
 
   @override

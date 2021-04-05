@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
 class Sound extends StatefulWidget {
@@ -42,7 +41,7 @@ class SoundState extends State<Sound> {
     _soundIds = Map();
     for (var value in _SOUNDS) {
       scheduleMicrotask(() async {
-        final data = await rootBundle.load('assets/audios/$value');
+        final data = await DefaultAssetBundle.of(context).load('assets/audios/$value');
         _soundIds[value] = await _pool.load(data);
       });
     }
