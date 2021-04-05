@@ -43,7 +43,7 @@ class IconDragon extends StatefulWidget {
 
   @override
   _IconDragonState createState() {
-    return new _IconDragonState();
+    return _IconDragonState();
   }
 }
 

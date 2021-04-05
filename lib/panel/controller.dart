@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:math' as math;
 
+import 'package:align_positioned/align_positioned.dart';
 import 'package:flutter/material.dart';
 import 'package:tetris/gamer/gamer.dart';
 
@@ -12,7 +12,7 @@ class GameController extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Expanded(child: LeftController()),
-          Expanded(child: DirectionController()),
+          Expanded(child: FunctionController()),
         ],
       ),
     );
@@ -23,115 +23,33 @@ const Size _DIRECTION_BUTTON_SIZE = const Size(48, 48);
 
 const Size _SYSTEM_BUTTON_SIZE = const Size(28, 28);
 
-const double _DIRECTION_SPACE = 16;
-
-const double _iconSize = 16;
-
-class DirectionController extends StatelessWidget {
+class FunctionController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
-      children: <Widget>[
-        SizedBox.fromSize(size: _DIRECTION_BUTTON_SIZE * 2.8),
-        Transform.rotate(
-          angle: math.pi / 4,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Transform.scale(
-                    scale: 1.5,
-                    child: Transform.rotate(
-                        angle: -math.pi / 4,
-                        child: Icon(
-                          Icons.arrow_drop_up,
-                          size: _iconSize,
-                        )),
-                  ),
-                  Transform.scale(
-                    scale: 1.5,
-                    child: Transform.rotate(
-                        angle: -math.pi / 4,
-                        child: Icon(
-                          Icons.arrow_right,
-                          size: _iconSize,
-                        )),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Transform.scale(
-                    scale: 1.5,
-                    child: Transform.rotate(
-                        angle: -math.pi / 4,
-                        child: Icon(
-                          Icons.arrow_left,
-                          size: _iconSize,
-                        )),
-                  ),
-                  Transform.scale(
-                    scale: 1.5,
-                    child: Transform.rotate(
-                        angle: -math.pi / 4,
-                        child: Icon(
-                          Icons.arrow_drop_down,
-                          size: _iconSize,
-                        )),
-                  ),
-                ],
-              ),
-            ],
-          ),
+      children: [
+        AlignPositioned(
+          dx: _DIRECTION_BUTTON_SIZE.width / 1.4,
+          dy: -_DIRECTION_BUTTON_SIZE.height / 3,
+          child: _Button(
+              enableLongPress: false,
+              icon: Icon(Icons.arrow_downward_sharp),
+              size: _DIRECTION_BUTTON_SIZE,
+              onTap: () {
+                Game.of(context).drop();
+              }),
         ),
-        Transform.rotate(
-          angle: math.pi / 4,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(height: _DIRECTION_SPACE),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  _Button(
-                      enableLongPress: false,
-                      size: _DIRECTION_BUTTON_SIZE,
-                      onTap: () {
-                        Game.of(context).rotate();
-                      }),
-                  SizedBox(width: _DIRECTION_SPACE),
-                  _Button(
-                      size: _DIRECTION_BUTTON_SIZE,
-                      onTap: () {
-                        Game.of(context).right();
-                      }),
-                ],
-              ),
-              SizedBox(height: _DIRECTION_SPACE),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  _Button(
-                      size: _DIRECTION_BUTTON_SIZE,
-                      onTap: () {
-                        Game.of(context).left();
-                      }),
-                  SizedBox(width: _DIRECTION_SPACE),
-                  _Button(
-                    size: _DIRECTION_BUTTON_SIZE,
-                    onTap: () {
-                      Game.of(context).down();
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: _DIRECTION_SPACE),
-            ],
-          ),
+        AlignPositioned(
+          dx: -_DIRECTION_BUTTON_SIZE.width / 1.4,
+          dy: _DIRECTION_BUTTON_SIZE.height / 3,
+          child: _Button(
+              enableLongPress: false,
+              icon: Icon(Icons.rotate_right),
+              size: _DIRECTION_BUTTON_SIZE,
+              onTap: () {
+                Game.of(context).rotate();
+              }),
         ),
       ],
     );
@@ -146,36 +64,30 @@ class SystemButtonGroup extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        _Description(
-          text: 'SOUNDS',
-          child: _Button(
-              size: _SYSTEM_BUTTON_SIZE,
-              color: _systemButtonColor,
-              enableLongPress: false,
-              onTap: () {
-                Game.of(context).soundSwitch();
-              }),
-        ),
-        _Description(
-          text: "PAUSE/RESUME",
-          child: _Button(
-              size: _SYSTEM_BUTTON_SIZE,
-              color: _systemButtonColor,
-              enableLongPress: false,
-              onTap: () {
-                Game.of(context).pauseOrResume();
-              }),
-        ),
-        _Description(
-          text: 'RESET',
-          child: _Button(
-              size: _SYSTEM_BUTTON_SIZE,
-              enableLongPress: false,
-              color: Colors.red,
-              onTap: () {
-                Game.of(context).reset();
-              }),
-        )
+        _Button(
+            size: _SYSTEM_BUTTON_SIZE,
+            icon: GameState.of(context).muted ? Icon(Icons.volume_up) : Icon(Icons.volume_off),
+            color: _systemButtonColor,
+            enableLongPress: false,
+            onTap: () {
+              Game.of(context).soundSwitch();
+            }),
+        _Button(
+            size: _SYSTEM_BUTTON_SIZE,
+            icon: GameState.of(context).states == GameStates.paused ? Icon(Icons.play_arrow_sharp) : Icon(Icons.pause),
+            color: _systemButtonColor,
+            enableLongPress: false,
+            onTap: () {
+              Game.of(context).pauseOrResume();
+            }),
+        _Button(
+            size: _SYSTEM_BUTTON_SIZE,
+            icon: Icon(Icons.refresh_sharp),
+            enableLongPress: false,
+            color: Colors.red,
+            onTap: () {
+              Game.of(context).reset();
+            })
       ],
     );
   }
@@ -200,14 +112,62 @@ class LeftController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        SystemButtonGroup(),
+        Expanded(flex: 1, child: SystemButtonGroup()),
         Expanded(
-          child: Center(
-            child: DropButton(),
+          flex: 6,
+          child: DirectionController(),
+        ),
+      ],
+    );
+  }
+}
+
+class DirectionController extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        AlignPositioned(
+          dx: -_DIRECTION_BUTTON_SIZE.width,
+          dy: -_DIRECTION_BUTTON_SIZE.height / 2,
+          child: _Button(
+              size: _DIRECTION_BUTTON_SIZE,
+              icon: Transform.scale(
+                scale: 1.5,
+                child: Icon(Icons.chevron_left),
+              ),
+              onTap: () {
+                Game.of(context).left();
+              }),
+        ),
+        AlignPositioned(
+          dx: _DIRECTION_BUTTON_SIZE.width,
+          dy: -_DIRECTION_BUTTON_SIZE.height / 2,
+          child: _Button(
+              size: _DIRECTION_BUTTON_SIZE,
+              icon: Transform.scale(
+                scale: 1.5,
+                child: Icon(Icons.chevron_right),
+              ),
+              onTap: () {
+                Game.of(context).right();
+              }),
+        ),
+        AlignPositioned(
+          dy: _DIRECTION_BUTTON_SIZE.height / 1.5,
+          child: _Button(
+            size: _DIRECTION_BUTTON_SIZE,
+            icon: Transform.scale(
+              scale: 1.5,
+              child: Icon(Icons.keyboard_arrow_down_sharp),
+            ),
+            onTap: () {
+              Game.of(context).down();
+            },
           ),
-        )
+        ),
       ],
     );
   }
@@ -224,13 +184,18 @@ class _Button extends StatefulWidget {
 
   final bool enableLongPress;
 
-  const _Button(
-      {Key key, @required this.size, @required this.onTap, this.icon, this.color = Colors.blue, this.enableLongPress = true})
-      : super(key: key);
+  const _Button({
+    Key key,
+    @required this.size,
+    @required this.onTap,
+    this.icon,
+    this.color = Colors.blue,
+    this.enableLongPress = true,
+  }) : super(key: key);
 
   @override
   _ButtonState createState() {
-    return new _ButtonState();
+    return _ButtonState();
   }
 }
 
@@ -354,8 +319,11 @@ class _ButtonState extends State<_Button> {
               _color = widget.color;
             });
         },
-        child: SizedBox.fromSize(
-          size: widget.size,
+        child: Container(
+          width: widget.size.width,
+          height: widget.size.height,
+          margin: EdgeInsets.zero,
+          child: widget.icon,
         ),
       ),
     );

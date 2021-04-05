@@ -62,7 +62,7 @@ class _NextBlock extends StatelessWidget {
 class _GameStatus extends StatefulWidget {
   @override
   _GameStatusState createState() {
-    return new _GameStatusState();
+    return _GameStatusState();
   }
 }
 

@@ -11,19 +11,16 @@ class PagePortrait extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final screenW = size.width * 0.8;
 
-    return SizedBox.expand(
+    return SafeArea(
       child: Container(
         color: BACKGROUND_COLOR,
-        child: Padding(
-          padding: MediaQuery.of(context).padding,
-          child: Column(
-            children: <Widget>[
-              Spacer(),
-              _ScreenDecoration(child: Screen(width: screenW)),
-              Spacer(flex: 2),
-              GameController(),
-            ],
-          ),
+        child: Column(
+          children: <Widget>[
+            Spacer(),
+            _ScreenDecoration(child: Screen(width: screenW)),
+            Spacer(),
+            GameController(),
+          ],
         ),
       ),
     );

@@ -5,40 +5,25 @@ class PageLand extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     height -= MediaQuery.of(context).viewInsets.vertical;
-    return SizedBox.expand(
+    return SafeArea(
       child: Container(
         color: BACKGROUND_COLOR,
-        child: Padding(
-          padding: MediaQuery.of(context).padding,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Spacer(),
-                    SystemButtonGroup(),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40, bottom: 40),
-                      child: DropButton(),
-                    )
-                  ],
-                ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Expanded(flex: 1, child: SystemButtonGroup()),
+                  Expanded(flex: 4, child: DirectionController())
+                ],
               ),
-              _ScreenDecoration(child: Screen.fromHeight(height * 0.8)),
-              Expanded(
-                child: Column(
-                  children: <Widget>[
-                    Spacer(),
-                    DirectionController(),
-                    SizedBox(height: 30),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+            _ScreenDecoration(child: Screen.fromHeight(height * 0.8)),
+            Expanded(
+              child: Center(child: FunctionController()),
+            ),
+          ],
         ),
       ),
     );
