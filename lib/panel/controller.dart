@@ -34,10 +34,10 @@ class FunctionController extends StatelessWidget {
           dy: -_DIRECTION_BUTTON_SIZE.height / 3,
           child: _Button(
               enableLongPress: false,
-              icon: Icon(Icons.arrow_downward_sharp),
+              icon: Icon(Icons.rotate_right),
               size: _DIRECTION_BUTTON_SIZE,
               onTap: () {
-                Game.of(context).drop();
+                Game.of(context).rotate();
               }),
         ),
         AlignPositioned(
@@ -45,10 +45,10 @@ class FunctionController extends StatelessWidget {
           dy: _DIRECTION_BUTTON_SIZE.height / 3,
           child: _Button(
               enableLongPress: false,
-              icon: Icon(Icons.rotate_right),
+              icon: Icon(Icons.arrow_downward_sharp),
               size: _DIRECTION_BUTTON_SIZE,
               onTap: () {
-                Game.of(context).rotate();
+                Game.of(context).drop();
               }),
         ),
       ],
