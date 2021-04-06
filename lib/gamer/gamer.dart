@@ -61,17 +61,42 @@ class Game extends StatefulWidget {
 ///duration for show a line when reset
 const _REST_LINE_DURATION = const Duration(milliseconds: 50);
 
-const _LEVEL_MAX = 6;
+const _LEVEL_MAX = 30;
 
 const _LEVEL_MIN = 1;
 
+/// Use NTSC frames https://listfist.com/list-of-tetris-levels-by-speed-nes-ntsc-vs-pal
 const _SPEED = [
-  const Duration(milliseconds: 800),
-  const Duration(milliseconds: 650),
-  const Duration(milliseconds: 500),
-  const Duration(milliseconds: 370),
-  const Duration(milliseconds: 250),
+  const Duration(milliseconds: 960),
+  const Duration(milliseconds: 860),
+  const Duration(milliseconds: 760),
+  const Duration(milliseconds: 660),
+  const Duration(milliseconds: 560),
+  const Duration(milliseconds: 460),
+  const Duration(milliseconds: 360),
+  const Duration(milliseconds: 260),
   const Duration(milliseconds: 160),
+  const Duration(milliseconds: 120),
+  const Duration(milliseconds: 100),
+  const Duration(milliseconds: 100),
+  const Duration(milliseconds: 100),
+  const Duration(milliseconds: 80),
+  const Duration(milliseconds: 80),
+  const Duration(milliseconds: 80),
+  const Duration(milliseconds: 60),
+  const Duration(milliseconds: 60),
+  const Duration(milliseconds: 60),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 40),
+  const Duration(milliseconds: 20),
 ];
 
 class GameControl extends State<Game> with RouteAware {
