@@ -104,9 +104,14 @@ class Block {
         result[col][row] = shape[shape.length - 1 - row][col];
       }
     }
-    final nextXy = [this.xy[0] + ORIGIN[type][rotateIndex][0], this.xy[1] + ORIGIN[type][rotateIndex][1]];
+    var nextXy = [this.xy[0] + ORIGIN[type][rotateIndex][0], this.xy[1] + ORIGIN[type][rotateIndex][1]];
     final nextRotateIndex = rotateIndex + 1 >= ORIGIN[this.type].length ? 0 : rotateIndex + 1;
 
+    // fix rotate right size
+    final overlapped = (nextXy[0] + result[0].length) - GAME_PAD_MATRIX_W;
+    if (overlapped > 0) {
+      nextXy[0] = nextXy[0] - overlapped;
+    }
     return Block(type, result, nextXy, nextRotateIndex);
   }
 
