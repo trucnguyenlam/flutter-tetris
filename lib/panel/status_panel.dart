@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tetris/gamer/block.dart';
 import 'package:tetris/gamer/gamer.dart';
 import 'package:tetris/material/briks.dart';
 import 'package:tetris/material/images.dart';
@@ -40,8 +39,14 @@ class StatusPanel extends StatelessWidget {
 class _NextBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<List<int>> data = [List.filled(4, 0), List.filled(4, 0)];
-    final next = BLOCK_SHAPES[GameState.of(context).next.type];
+    List<List<int>> data = [
+      List.filled(4, 0),
+      List.filled(4, 0),
+      List.filled(4, 0),
+      List.filled(4, 0),
+    ];
+
+    final next = GameState.of(context).next.shape;
     for (int i = 0; i < next.length; i++) {
       for (int j = 0; j < next[i].length; j++) {
         data[i][j] = next[i][j];

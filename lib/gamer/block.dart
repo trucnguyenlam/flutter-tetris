@@ -141,13 +141,15 @@ class Block {
     return shape[y][x] == 1 ? 1 : null;
   }
 
-  static Block fromType(BlockType type) {
+  static Block fromType(BlockType type, bool rotate) {
     final shape = BLOCK_SHAPES[type];
-    return Block(type, shape, START_XY[type], 0);
+    final block = Block(type, shape, START_XY[type], 0);
+    return rotate? block.rotate(): block;
   }
 
   static Block getRandom() {
-    final i = math.Random().nextInt(BlockType.values.length);
-    return fromType(BlockType.values[i]);
+    final random = math.Random();
+    final i = random.nextInt(BlockType.values.length);
+    return fromType(BlockType.values[i], random.nextBool());
   }
 }
