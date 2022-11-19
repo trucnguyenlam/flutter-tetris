@@ -12,7 +12,16 @@ class GameController extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Expanded(child: LeftController()),
-          Expanded(child: FunctionController()),
+          Expanded(
+              child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Center(child: ElevatedButton(onPressed: () => Navigator.pop(context), child: const Text('Back'))),
+              ),
+              Expanded(flex: 6, child: FunctionController()),
+            ],
+          )),
         ],
       ),
     );
@@ -69,25 +78,19 @@ class SystemButtonGroup extends StatelessWidget {
             icon: GameState.of(context).muted ? Icon(Icons.volume_up) : Icon(Icons.volume_off),
             color: _systemButtonColor,
             enableLongPress: false,
-            onTap: () {
-              Game.of(context).soundSwitch();
-            }),
+            onTap: () => Game.of(context).soundSwitch()),
         _Button(
             size: _SYSTEM_BUTTON_SIZE,
             icon: GameState.of(context).states == GameStates.paused ? Icon(Icons.play_arrow_sharp) : Icon(Icons.pause),
             color: _systemButtonColor,
             enableLongPress: false,
-            onTap: () {
-              Game.of(context).pauseOrResume();
-            }),
+            onTap: () => Game.of(context).pauseOrResume()),
         _Button(
             size: _SYSTEM_BUTTON_SIZE,
             icon: Icon(Icons.refresh_sharp),
             enableLongPress: false,
             color: Colors.red,
-            onTap: () {
-              Game.of(context).reset();
-            })
+            onTap: () => Game.of(context).reset()),
       ],
     );
   }
@@ -99,11 +102,10 @@ class DropButton extends StatelessWidget {
     return _Description(
       text: 'drop',
       child: _Button(
-          enableLongPress: false,
-          size: Size(90, 90),
-          onTap: () {
-            Game.of(context).drop();
-          }),
+        enableLongPress: false,
+        size: Size(90, 90),
+        onTap: () => Game.of(context).drop(),
+      ),
     );
   }
 }

@@ -13,15 +13,20 @@ class PageLand extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Column(
-                children: <Widget>[
-                  Expanded(flex: 1, child: SystemButtonGroup()),
-                  Expanded(flex: 4, child: DirectionController())
-                ],
+                children: <Widget>[Expanded(flex: 1, child: SystemButtonGroup()), Expanded(flex: 4, child: DirectionController())],
               ),
             ),
             _ScreenDecoration(child: Screen.fromHeight(height * 0.8)),
             Expanded(
-              child: Center(child: FunctionController()),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Center(child: ElevatedButton(onPressed: () => Navigator.pop(context), child: const Text('Back'))),
+                  ),
+                  Expanded(flex: 4, child: Center(child: FunctionController())),
+                ],
+              ),
             ),
           ],
         ),
