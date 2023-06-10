@@ -19,8 +19,8 @@ void _disableDebugPrint() {
     return true;
   }());
   if (!debug) {
-    debugPrint = (String message, {int wrapWidth}) {
-      //disable log print when not in debug mode
+    debugPrint = (String? message, {int? wrapWidth}) {
+      // disable log print when not in debug mode
     };
   }
 }

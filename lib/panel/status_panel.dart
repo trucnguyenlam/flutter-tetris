@@ -15,15 +15,15 @@ class StatusPanel extends StatelessWidget {
         children: <Widget>[
           Text("Points", style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 4),
-          Number(number: GameState.of(context).points),
+          Number(number: GameState.of(context)?.points),
           SizedBox(height: 10),
           Text("Cleans", style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 4),
-          Number(number: GameState.of(context).cleared),
+          Number(number: GameState.of(context)?.cleared),
           SizedBox(height: 10),
           Text("Level", style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 4),
-          Number(number: GameState.of(context).level),
+          Number(number: GameState.of(context)?.level),
           SizedBox(height: 10),
           Text("Next", style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 4),
@@ -46,8 +46,8 @@ class _NextBlock extends StatelessWidget {
       List.filled(4, 0),
     ];
 
-    final next = GameState.of(context).next.shape;
-    for (int i = 0; i < next.length; i++) {
+    final next = GameState.of(context)?.next.shape;
+    for (int i = 0; i < next!.length; i++) {
       for (int j = 0; j < next[i].length; j++) {
         data[i][j] = next[i][j];
       }
@@ -72,13 +72,13 @@ class _GameStatus extends StatefulWidget {
 }
 
 class _GameStatusState extends State<_GameStatus> {
-  Timer _timer;
+  Timer? _timer;
 
   bool _colonEnable = true;
 
-  int _minute;
+  int? _minute;
 
-  int _hour;
+  int? _hour;
 
   @override
   void initState() {
@@ -104,9 +104,9 @@ class _GameStatusState extends State<_GameStatus> {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        IconSound(enable: GameState.of(context).muted),
+        IconSound(enable: true == GameState.of(context)?.muted),
         SizedBox(width: 4),
-        IconPause(enable: GameState.of(context).states == GameStates.paused),
+        IconPause(enable: GameStates.paused == GameState.of(context)?.states),
         Spacer(),
         Number(number: _hour, length: 2, padWithZero: true),
         IconColon(enable: _colonEnable),

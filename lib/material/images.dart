@@ -12,11 +12,11 @@ class Number extends StatelessWidget {
 
   ///the number to show
   ///could be null
-  final int number;
+  final int? number;
 
   final bool padWithZero;
 
-  Number({Key key, this.length = 5, @required this.number, this.padWithZero = false}) : super(key: key);
+  Number({Key? key, this.length = 5, required this.number, this.padWithZero = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class Number extends StatelessWidget {
 class IconDragon extends StatefulWidget {
   final bool animate;
 
-  const IconDragon({Key key, this.animate = false}) : super(key: key);
+  const IconDragon({Key? key, this.animate = false}) : super(key: key);
 
   @override
   _IconDragonState createState() {
@@ -48,7 +48,7 @@ class IconDragon extends StatefulWidget {
 }
 
 class _IconDragonState extends State<IconDragon> {
-  Timer _timer;
+  Timer? _timer;
 
   @override
   void didUpdateWidget(IconDragon oldWidget) {
@@ -114,7 +114,7 @@ class IconPause extends StatelessWidget {
   final bool enable;
   final Size size;
 
-  const IconPause({Key key, this.enable = true, this.size = const Size(18, 16)}) : super(key: key);
+  const IconPause({Key? key, this.enable = true, this.size = const Size(18, 16)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class IconSound extends StatelessWidget {
   final bool enable;
   final Size size;
 
-  const IconSound({Key key, this.enable = true, this.size = const Size(18, 16)}) : super(key: key);
+  const IconSound({Key? key, this.enable = true, this.size = const Size(18, 16)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class IconColon extends StatelessWidget {
 
   final Size size;
 
-  const IconColon({Key key, this.enable = true, this.size = const Size(10, 17)}) : super(key: key);
+  const IconColon({Key? key, this.enable = true, this.size = const Size(10, 17)}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -163,11 +163,11 @@ class IconColon extends StatelessWidget {
 class Digital extends StatelessWidget {
   ///number 0 - 9
   ///or null indicate it is invalid
-  final int digital;
+  final int? digital;
 
   final Size size;
 
-  Digital(this.digital, {Key key, this.size = const Size(10, 17)})
+  Digital(this.digital, {Key? key, this.size = const Size(10, 17)})
       : assert(digital == null || (digital <= 9 && digital >= 0)),
         super(key: key);
 
@@ -195,12 +195,12 @@ class _Material extends StatelessWidget {
 
   final Offset srcOffset;
 
-  const _Material({Key key, @required this.size, @required this.srcSize, @required this.srcOffset}) : super(key: key);
+  const _Material({Key? key, required this.size, required this.srcSize, required this.srcOffset}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      foregroundPainter: _MaterialPainter(srcOffset, srcSize, GameMaterial.getMaterial(context)),
+      foregroundPainter: _MaterialPainter(srcOffset, srcSize, GameMaterial.getMaterial(context)!),
       child: SizedBox.fromSize(
         size: size,
       ),

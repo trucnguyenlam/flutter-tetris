@@ -46,7 +46,7 @@ class FunctionController extends StatelessWidget {
               icon: Icon(Icons.rotate_right),
               size: _DIRECTION_BUTTON_SIZE,
               onTap: () {
-                Game.of(context).rotate();
+                Game.of(context)?.rotate();
               }),
         ),
         AlignPositioned(
@@ -57,7 +57,7 @@ class FunctionController extends StatelessWidget {
               icon: Icon(Icons.arrow_downward_sharp),
               size: _DIRECTION_BUTTON_SIZE,
               onTap: () {
-                Game.of(context).drop();
+                Game.of(context)?.drop();
               }),
         ),
       ],
@@ -75,22 +75,22 @@ class SystemButtonGroup extends StatelessWidget {
       children: <Widget>[
         _Button(
             size: _SYSTEM_BUTTON_SIZE,
-            icon: GameState.of(context).muted ? Icon(Icons.volume_up) : Icon(Icons.volume_off),
+            icon: (true == GameState.of(context)?.muted) ? Icon(Icons.volume_up) : Icon(Icons.volume_off),
             color: _systemButtonColor,
             enableLongPress: false,
-            onTap: () => Game.of(context).soundSwitch()),
+            onTap: () => Game.of(context)?.soundSwitch()),
         _Button(
             size: _SYSTEM_BUTTON_SIZE,
-            icon: GameState.of(context).states == GameStates.paused ? Icon(Icons.play_arrow_sharp) : Icon(Icons.pause),
+            icon: GameStates.paused == GameState.of(context)?.states ? Icon(Icons.play_arrow_sharp) : Icon(Icons.pause),
             color: _systemButtonColor,
             enableLongPress: false,
-            onTap: () => Game.of(context).pauseOrResume()),
+            onTap: () => Game.of(context)?.pauseOrResume()),
         _Button(
             size: _SYSTEM_BUTTON_SIZE,
             icon: Icon(Icons.refresh_sharp),
             enableLongPress: false,
             color: Colors.red,
-            onTap: () => Game.of(context).reset()),
+            onTap: () => Game.of(context)?.reset()),
       ],
     );
   }
@@ -104,7 +104,7 @@ class DropButton extends StatelessWidget {
       child: _Button(
         enableLongPress: false,
         size: Size(90, 90),
-        onTap: () => Game.of(context).drop(),
+        onTap: () => Game.of(context)?.drop(),
       ),
     );
   }
@@ -141,7 +141,7 @@ class DirectionController extends StatelessWidget {
                 child: Icon(Icons.chevron_left),
               ),
               onTap: () {
-                Game.of(context).left();
+                Game.of(context)?.left();
               }),
         ),
         AlignPositioned(
@@ -154,7 +154,7 @@ class DirectionController extends StatelessWidget {
                 child: Icon(Icons.chevron_right),
               ),
               onTap: () {
-                Game.of(context).right();
+                Game.of(context)?.right();
               }),
         ),
         AlignPositioned(
@@ -166,7 +166,7 @@ class DirectionController extends StatelessWidget {
               child: Icon(Icons.keyboard_arrow_down_sharp),
             ),
             onTap: () {
-              Game.of(context).down();
+              Game.of(context)?.down();
             },
           ),
         ),
@@ -177,7 +177,7 @@ class DirectionController extends StatelessWidget {
 
 class _Button extends StatefulWidget {
   final Size size;
-  final Widget icon;
+  final Widget? icon;
 
   final VoidCallback onTap;
 
@@ -187,9 +187,9 @@ class _Button extends StatefulWidget {
   final bool enableLongPress;
 
   const _Button({
-    Key key,
-    @required this.size,
-    @required this.onTap,
+    Key? key,
+    required this.size,
+    required this.onTap,
     this.icon,
     this.color = Colors.blue,
     this.enableLongPress = true,
@@ -210,12 +210,11 @@ class _Description extends StatelessWidget {
   final AxisDirection direction;
 
   const _Description({
-    Key key,
-    this.text,
+    Key? key,
+    required this.text,
     this.direction = AxisDirection.down,
-    this.child,
-  })  : assert(direction != null),
-        super(key: key);
+    required this.child,
+  })  : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -251,11 +250,11 @@ class _Description extends StatelessWidget {
 }
 
 class _ButtonState extends State<_Button> {
-  Timer _timer;
+  Timer? _timer;
 
   bool _tapEnded = false;
 
-  Color _color;
+  Color? _color;
 
   @override
   void didUpdateWidget(_Button oldWidget) {

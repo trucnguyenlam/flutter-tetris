@@ -7,7 +7,7 @@ import 'gamer.dart';
 class KeyboardController extends StatefulWidget {
   final Widget child;
 
-  KeyboardController({this.child});
+  KeyboardController({required this.child});
 
   @override
   _KeyboardControllerState createState() => _KeyboardControllerState();
@@ -26,7 +26,7 @@ class _KeyboardControllerState extends State<KeyboardController> {
     }
 
     final key = event.data.logicalKey;
-    final game = Game.of(context);
+    final game = Game.of(context)!;
 
     if (key == LogicalKeyboardKey.arrowUp) {
       game.rotate();

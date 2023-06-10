@@ -95,17 +95,17 @@ class Block {
   }
 
   Block rotate() {
-    List<List<int>> result = List.filled(shape[0].length, null, growable: false);
+    List<List<int>> result = List.filled(shape[0].length, [], growable: false);
     for (int row = 0; row < shape.length; row++) {
       for (int col = 0; col < shape[row].length; col++) {
-        if (result[col] == null) {
+        if (result[col].isEmpty) {
           result[col] = List.filled(shape.length, 0, growable: false);
         }
         result[col][row] = shape[shape.length - 1 - row][col];
       }
     }
-    var nextXy = [this.xy[0] + ORIGIN[type][rotateIndex][0], this.xy[1] + ORIGIN[type][rotateIndex][1]];
-    final nextRotateIndex = rotateIndex + 1 >= ORIGIN[this.type].length ? 0 : rotateIndex + 1;
+    var nextXy = [this.xy[0] + ORIGIN[type]![rotateIndex][0], this.xy[1] + ORIGIN[type]![rotateIndex][1]];
+    final nextRotateIndex = rotateIndex + 1 >= ORIGIN[this.type]!.length ? 0 : rotateIndex + 1;
 
     // fix rotate right size
     final overlapped = (nextXy[0] + result[0].length) - GAME_PAD_MATRIX_W;
@@ -132,7 +132,7 @@ class Block {
 
   ///return null if do not show at [x][y]
   ///return 1 if show at [x,y]
-  int get(int x, int y) {
+  int? get(int x, int y) {
     x -= xy[0];
     y -= xy[1];
     if (x < 0 || x >= shape[0].length || y < 0 || y >= shape.length) {
@@ -143,7 +143,7 @@ class Block {
 
   static Block fromType(BlockType type, bool rotate) {
     final shape = BLOCK_SHAPES[type];
-    final block = Block(type, shape, START_XY[type], 0);
+    final block = Block(type, shape!, START_XY[type]!, 0);
     return rotate? block.rotate(): block;
   }
 
